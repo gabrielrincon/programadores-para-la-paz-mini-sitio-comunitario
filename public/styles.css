@@ -1,21 +1,287 @@
 .decoracion {
-    color: blue; 
-    background-color: lightblue;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
-    width: 100%;
+  position: relative;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-align: center;
+  color: #0f172a;
+  margin: 1.75rem auto 1.25rem;
+  padding: 0 0.5rem 1rem;
+  max-width: 42rem;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  width: 100%;
 }
 
-#btnMensajes {
-  background-color: red;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
+.decoracion::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(10rem, 55%);
+  height: 0.28rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #06b6d4,
+    #10b981,
+    #6366f1
+  );
+  box-shadow: 0 0 1.25rem rgba(6, 182, 212, 0.35);
+}
+
+h1.decoracion {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(120deg, #0f172a 0%, #1e3a5f 45%, #0f766e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 1.15rem;
+}
+
+@supports not (background-clip: text) {
+  h1.decoracion {
+    color: #0f172a;
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+h2.decoracion {
+  font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+  margin-top: 2.25rem;
+  padding-bottom: 0.85rem;
+}
+
+h2.decoracion::after {
+  width: min(6.5rem, 40%);
+  height: 0.2rem;
+  opacity: 0.92;
+}
+
+.boton-primario {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+  padding: 0.65rem 1.5rem 0.65rem 1.35rem;
+  min-height: 2.75rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  color: #f8fafc;
+  text-shadow: 0 1px 1px rgba(15, 23, 42, 0.25);
   border: none;
+  border-radius: 999px;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    125deg,
+    #0e7490 0%,
+    #0d9488 38%,
+    #059669 62%,
+    #4f46e5 100%
+  );
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 10px 26px -6px rgba(6, 182, 212, 0.55),
+    0 6px 16px -4px rgba(79, 70, 229, 0.4);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    filter 0.2s ease;
+}
+
+.boton-primario::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0) 48%
+  );
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.boton-primario::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.boton-primario:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06) saturate(1.05);
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 14px 32px -6px rgba(6, 182, 212, 0.6),
+    0 10px 22px -4px rgba(99, 102, 241, 0.45);
+}
+
+.boton-primario:hover::after {
+  transform: translateX(120%);
+}
+
+.boton-primario:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.1),
+    0 6px 14px -4px rgba(6, 182, 212, 0.45);
+}
+
+.boton-primario:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 3px;
+}
+
+.boton-primario:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.contenedor-tarjetas {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  max-width: 44rem;
+}
+
+.contenedor-tarjetas:not(:has(.tarjeta)) {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tarjeta {
+  position: relative;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 1.35rem 1.4rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 12px 28px -8px rgba(15, 23, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tarjeta::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, #06b6d4, #10b981, #6366f1);
+  opacity: 0.95;
+}
+
+.tarjeta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(6, 182, 212, 0.35);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 16px 36px -10px rgba(15, 23, 42, 0.18);
+}
+
+.tarjeta__encabezado {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding-top: 0.15rem;
+}
+
+.tarjeta__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0e7490;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+}
+
+.tarjeta__titulo {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.tarjeta__mensaje {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.tarjeta__meta {
+  display: grid;
+  gap: 0.65rem 1rem;
+  margin: 0;
+  padding: 0.85rem 0 0;
+  border-top: 1px solid rgba(226, 232, 240, 0.95);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 520px) {
+  .tarjeta__meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tarjeta__meta > div {
+  margin: 0;
+  min-width: 0;
+}
+
+.tarjeta__meta dt {
+  margin: 0 0 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.tarjeta__meta dd {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #475569;
+  word-break: break-word;
 }

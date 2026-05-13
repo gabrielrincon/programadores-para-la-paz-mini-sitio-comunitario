@@ -4,6 +4,15 @@ const btnCalendario = document.getElementById("btnCalendario")
 const contenedorMensajes = document.getElementById("contenedorMensajes")
 const contenedorCalendario = document.getElementById("contenedorCalendario")
 
+function escapeHtml(valor) {
+  if (valor == null) return ""
+  return String(valor)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+}
+
 btnMensajes.addEventListener("click", () => {
   cargarMensajes()
 })
@@ -20,18 +29,23 @@ async function cargarMensajes() {
     contenedorMensajes.innerHTML = ""
 
     for (const mensaje of mensajes) {
-      const bloque = document.createElement("div")
+      const bloque = document.createElement("article")
+      bloque.className = "tarjeta"
+      const cat = escapeHtml(mensaje.categoria)
 
       bloque.innerHTML = `
-        <h3>${mensaje.titulo}</h3>
-        <p>${mensaje.mensaje}</p>
-        <p>Categoría: ${mensaje.categoria}</p>
-        <p>Audiencia: ${mensaje.audiencia}</p>
-        <p>Tono: ${mensaje.tono}</p>
-        <p>Llamado a la acción: ${mensaje.llamadoAccion}</p>
-        <p>Fuente: ${mensaje.fuente}</p>
-        <p>Revisión editorial: ${mensaje.revisionEditorial}</p>
-        <hr>
+        <header class="tarjeta__encabezado">
+          ${cat ? `<span class="tarjeta__badge">${cat}</span>` : ""}
+          <h3 class="tarjeta__titulo">${escapeHtml(mensaje.titulo)}</h3>
+        </header>
+        <p class="tarjeta__mensaje">${escapeHtml(mensaje.mensaje)}</p>
+        <dl class="tarjeta__meta">
+          <div><dt>Audiencia</dt><dd>${escapeHtml(mensaje.audiencia)}</dd></div>
+          <div><dt>Tono</dt><dd>${escapeHtml(mensaje.tono)}</dd></div>
+          <div><dt>Llamado a la acción</dt><dd>${escapeHtml(mensaje.llamadoAccion)}</dd></div>
+          <div><dt>Fuente</dt><dd>${escapeHtml(mensaje.fuente)}</dd></div>
+          <div><dt>Revisión editorial</dt><dd>${escapeHtml(mensaje.revisionEditorial)}</dd></div>
+        </dl>
       `
 
       contenedorMensajes.appendChild(bloque)
