@@ -1,0 +1,21 @@
+.decoracion {
+    color: blue; 
+    background-color: lightblue;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+    width: 100%;
+}
+
+#btnMensajes {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
